@@ -1,0 +1,69 @@
+（1）全选后粘贴：
+
+
+
+cmake_minimum_required(VERSION 3.20)      #这里填编译器版本
+project(MyProject)            #这里填项目名字，MyProject为例
+
+#===== C++20 标准设置 =====
+set(CMAKE_CXX_STANDARD 20)    #这里填c++版本,这里c++20为例
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+
+#===== Windows 特定设置 =====
+if(WIN32)
+    add_compile_options("$<$<CXX_COMPILER_ID:MSVC>:/utf-8>")
+    add_compile_options("$<$<CXX_COMPILER_ID:GNU>:-fexec-charset=UTF-8>")
+    add_compile_definitions(NOMINMAX WIN32_LEAN_AND_MEAN)
+endif()
+
+#===== 全局强制静态链接 GCC 运行时库 =====
+if(WIN32 AND CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static -static-libgcc -static-libstdc++")
+endif()
+
+#===== 自动收集并编译所有 .cpp 文件 =====
+file(GLOB_RECURSE files CONFIGURE_DEPENDS "${CMAKE_SOURCE_DIR}/*.cpp")
+list(FILTER files EXCLUDE REGEX "cmake-build")
+
+foreach(file ${files})
+    # 获取文件信息
+    get_filename_component(file_name ${file} NAME)
+    get_filename_component(raw_name ${file} NAME_WE)
+    get_filename_component(dir_path ${file} DIRECTORY)
+
+    # 自动保留完整路径：runtime/code/xxx/xxx
+    file(RELATIVE_PATH rel_dir "${CMAKE_SOURCE_DIR}" "${dir_path}")
+    set(output_dir "${CMAKE_SOURCE_DIR}/runtime/${rel_dir}")
+
+    # 内部目标名
+    string(MD5 target_id "${file}")
+    string(SUBSTRING "${target_id}" 0 16 target_name)
+
+    # EXE 名字 = 完整中文名）
+    string(REPLACE " " "_" exe_name "${raw_name}")
+
+    # 日志显示完整名称
+    message(STATUS "编译: ${file_name} -> 路径: ${rel_dir} -> 输出: ${exe_name}.exe")
+
+    # 编译
+    if(NOT TARGET ${target_name})
+        add_executable(${target_name} "${file}")
+
+        if(WIN32 AND CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+            set_target_properties(${target_name} PROPERTIES
+                    LINK_FLAGS "-static -static-libgcc -static-libstdc++"
+            )
+        endif()
+
+        set_target_properties(${target_name} PROPERTIES
+                OUTPUT_NAME "${exe_name}"
+                RUNTIME_OUTPUT_DIRECTORY "${output_dir}"
+        )
+    endif()
+endforeach()
+
+
+
+
+（2）重新构建
