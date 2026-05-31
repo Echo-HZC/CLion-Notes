@@ -1,6 +1,5 @@
-（1）全选后粘贴：
-
-
+## （1）全选后粘贴：
+```cmake
 
 cmake_minimum_required(VERSION 3.20)      #这里填编译器版本
 project(MyProject)            #这里填项目名字，MyProject为例
@@ -63,7 +62,9 @@ foreach(file ${files})
     endif()
 endforeach()
 
+```
 
 
+## （2）重新构建项目
+顶端菜单栏 →构建->重新构建项目
 
-（2）重新构建
