@@ -69,4 +69,4 @@ CLion 需要至少一个工具链（编译器 + CMake + 调试器）。
 新建项目后，CLion 会自动生成 `CMakeLists.txt`，初学者先不要删改，能编译运行后再学习修改。
 
 ---
-完成以上步骤后，请继续浏览：[CMakeList修改](2.CLion学习修改/CMakeList修改)
+完成以上步骤后，请继续浏览：[CLion学习修改介绍](2.CLion学习修改/CLion学习修改介绍.md)
