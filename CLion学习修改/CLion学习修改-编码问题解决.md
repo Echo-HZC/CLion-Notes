@@ -59,47 +59,6 @@ run.processes.with.pty=false
 
 ---
 
-## 补充：CMakeLists.txt 编码配置（可选）
 
-如果上述三步后仍有乱码，可在 `CMakeLists.txt` 中追加编译器编码选项：
 
-```cmake
-# MinGW / GCC
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fexec-charset=UTF-8 -finput-charset=UTF-8")
-
-# MSVC
-add_compile_options("/utf-8")
-```
-
----
-
-## 验证步骤
-
-创建一个测试文件 `test.cpp`：
-
-```cpp
-#include <iostream>
-
-int main() {
-    std::cout << "中文测试：Hello 世界" << std::endl;
-    return 0;
-}
-```
-
-运行后，若控制台输出 **"中文测试：Hello 世界"** 且无乱码，则配置成功。
-
----
-
-## 配置汇总速查表
-
-| 步骤 | 路径 | 关键设置 |
-|------|------|----------|
-| 1 | 设置 → 编辑器 → 文件编码 | 全部设为 UTF-8，勾选透明转换 |
-| 2 | 设置 → 工具 → 终端 | 环境变量添加 `CHCP=65001` |
-| 3 | Help → Edit Custom Properties | 添加 `run.processes.with.pty=false` |
-| 重启 | — | 必须重启 CLion |
-
----
-
-*觉得有用？点个 ⭐ 支持一下！*
 
