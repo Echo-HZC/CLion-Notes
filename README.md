@@ -6,10 +6,9 @@
 
 | 文件 | 内容 |
 |------|------|
-| [CLion学习修改介绍](CLion学习修改/CLion学习修改介绍.txt) | 整体介绍 |
-| [CMakeLists修改](CLion学习修改/CLion学习修改-CMakeLists修改.txt) | CMakeLists 配置 |
-| [编码问题解决](CLion学习修改/CLion学习修改-编码问题解决.txt) | 中文乱码等 |
-| [强调几点](CLion学习修改/CLion学习修改-强调几点.txt) | 重要提醒 |
+| [CLion学习修改介绍](CLion学习修改/CLion学习修改介绍.md) | 整体介绍 |
+| [CMakeLists修改](CLion学习修改/CLion学习修改-CMakeLists修改.md) | CMakeLists 配置 |
+| [编码问题解决](CLion学习修改/CLion学习修改-编码问题解决.md) | 中文乱码等 |
 
 ## 🚀 快速开始
 
