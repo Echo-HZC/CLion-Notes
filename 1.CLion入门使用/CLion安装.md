@@ -44,4 +44,4 @@ First name / Last name：你的姓名
 打开邮箱，点击邮件中的 Verify email 链接完成验证
 
 ---
-完成以上步骤后，请继续浏览：[CLion配置工具链和使用.md]
+完成以上步骤后，请继续浏览：(CLion配置工具链和使用.md)
